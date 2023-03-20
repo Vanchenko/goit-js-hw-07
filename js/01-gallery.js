@@ -7,12 +7,8 @@ const divgalEl = document.querySelector('.gallery');
 const newStructEl = galleryItems.map((elem) => `
 <div class="gallery__item">
   <a class="gallery__link" href="${elem.original}">
-    <img
-      class="gallery__image"
-      src="${elem.preview}"
-      data-source="${elem.original}"
-      alt="${elem.description}"
-    />
+    <img class="gallery__image" src="${elem.preview}"
+      data-source="${elem.original}" alt="${elem.description}" />
   </a>
 </div>`).join("");
 divgalEl.insertAdjacentHTML("beforeend", newStructEl);
