@@ -14,17 +14,17 @@ const newStructEl = galleryItems.map((elem) => `
 divgalEl.insertAdjacentHTML("beforeend", newStructEl);
 divgalEl.addEventListener("click", selectPicture);
 
-function selectPicture(event) {
-    event.preventDefault();
-    if (event.target.nodeName !== "IMG") { return };
+let gallery = new SimpleLightbox('.gallery a', {
+    enableKeyboard: true,
+    captionPosition: 'bottom',
+    captionSelector: 'img',
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionDelay: 250,
+    showCounter: false,
+});
 
-    let gallery = new SimpleLightbox('.gallery a', {
-        enableKeyboard: true,
-        captionPosition: 'bottom',
-        captionSelector: 'img',
-        captionType: 'attr',
-        captionsData: 'alt',
-        captionDelay: 250,
-        showCounter: false,
-    });
+function selectPicture(event) {
+    if (event.target.nodeName !== "IMG") { return };
+    gallery.open(event.target.dataset.source);
 };
