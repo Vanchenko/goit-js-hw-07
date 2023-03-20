@@ -5,8 +5,8 @@ console.log(galleryItems);
 
 const divgalEl = document.querySelector('.gallery');
 const newStructEl = galleryItems.map((elem) => `
-<li class="gallery__item">
-  <a class="gallery__link" href="">
+<div class="gallery__item">
+  <a class="gallery__link" href="${elem.original}">
     <img
       class="gallery__image"
       src="${elem.preview}"
@@ -14,29 +14,21 @@ const newStructEl = galleryItems.map((elem) => `
       alt="${elem.description}"
     />
   </a>
-</li>`).join("");
+</div>`).join("");
 divgalEl.insertAdjacentHTML("beforeend", newStructEl);
+divgalEl.addEventListener("click", selectPicture);
 
-document.querySelector('button.image').onclick = () => {
-	basicLightbox.create(`
-		<img width="1400" height="900" src="https://placehold.it/1400x900">
-	`).show()
+function selectPicture(event) {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") { return };
+  const instance = basicLightbox.create(`
+ <img width="1400" height="900" src="${event.target.dataset.source}">`);
+  instance.show(() => { document.addEventListener("keyup", ev => {
+      if (ev.key === 'Escape') { instance.close() }
+    });
+  })
+};
 
-}
 
-//divgalEl.style.flexWrap = "wrap";
-
-
-
-
-
-/*const divgalEl = document.querySelector('.gallery');
-const newStructEl = galleryItems.map((elem) => `
-<div class="gallery__item">
-<a class="gallery__link" href="">
- <img class="gallery__image" src="${elem.preview}" alt="${elem.description}">
- </a>
- </div>`).join("");
-divgalEl.insertAdjacentHTML("beforeend", newStructEl);*/
 
  
