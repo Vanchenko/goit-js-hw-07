@@ -12,7 +12,6 @@ const newStructEl = galleryItems.map((elem) => `
   </a>
 </li>`).join("");
 divgalEl.insertAdjacentHTML("beforeend", newStructEl);
-divgalEl.addEventListener("click", selectPicture);
 
 let gallery = new SimpleLightbox('.gallery a', {
     enableKeyboard: true,
@@ -24,7 +23,3 @@ let gallery = new SimpleLightbox('.gallery a', {
     showCounter: false,
 });
 
-function selectPicture(event) {
-    if (event.target.nodeName !== "IMG") { return };
-    gallery.open(event.target.dataset.source);
-};
